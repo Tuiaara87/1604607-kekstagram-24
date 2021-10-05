@@ -1,24 +1,9 @@
 // Возвращение случайного числа
 
 function getNumber(from, to) {
-  let rand = from + Math.random() * (to + 1 - from);
+  const rand = from + Math.random() * (to + 1 - from);
   return Math.ceil(rand);
 }
-let number = getNumber(100, 200);
-
-// Функция для проверки максимальной длины строки
-
-function checkLength(line, maxLine) {
-  if (line.length < maxLine) {
-    console.log('Этот текст выведется в консоль, только если если строка проходит по длине');
-    return true;
-  } else {
-    console.log('Этот текст выведется в консоль, только если если строка не проходит по длине');
-    return false;
-  }
-}
-checkLength('i learn java script', 10);
-checkLength('i learn java script', 120);
 
 // Генерация данных
 
@@ -35,7 +20,7 @@ const NAMES = [
   'Маша',
   'Шура',
   'Наташа',
-]
+];
 
 const MESSAGES = [
   'Всё отлично!',
@@ -53,23 +38,23 @@ const createMyFirstObject = (id) => {
   const comments = [];
   const randomQuantityComments = getNumber(1, 5);
 
-  for (let i = 0; i < randomQuantityComments; i++) {
+  for (let index = 0; index < randomQuantityComments; index++) {
     const randomCommentsId = getNumber(0, 200);
     const randomAvatarIndex = getNumber(1, 6);
     const randomMessagesIndex = getNumber(0, MESSAGES.length - 1);
     const randomNamesIndex = getNumber(0, NAMES.length - 1);
     comments.push({
       id: randomCommentsId,
-      avatar: 'img/avatar-' + randomAvatarIndex + '.svg',
+      avatar: `img/avatar-${randomAvatarIndex}.svg`,
       message: MESSAGES[randomMessagesIndex],
       name: NAMES[randomNamesIndex],
-    })
+    });
   }
 
   return {
     id: id,
-    url: 'photos/' + id + '.jpg',
-    avatar: 'img/avatar-' + id + '.svg',
+    url: `photos/${id}.jpg`,
+    avatar: `img/avatar-${id}.svg`,
     description: DESCRIPTIONS[randomDescriptionIndex],
     likes: randomLikesCount,
     comments: comments,
@@ -77,10 +62,7 @@ const createMyFirstObject = (id) => {
 };
 
 const photos = [];
-for (let i = 1; i <= 25; i++) {
-  const photo = createMyFirstObject(i);
+for (let index = 1; index <= 25; index++) {
+  const photo = createMyFirstObject(index);
   photos.push(photo);
-};
-console.log(photos);
-
-
+}
