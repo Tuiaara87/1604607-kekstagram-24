@@ -5,8 +5,6 @@ function getNumber(from, to) {
   return Math.ceil(rand);
 }
 let number = getNumber(100, 200);
-alert(number);
-
 
 // Функция для проверки максимальной длины строки
 
@@ -47,37 +45,42 @@ const MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-// console.log(_);
 
-const createMyFirstObject = (i) => {
-  const randomDescriptionIndex = _.random(0, DESCRIPTIONS.length - 1);
-  const randomNamesIndex = _.random(0, NAMES.length - 1);
-  const randomMessagesIndex = _.random(0, MESSAGES.length - 1);
-  const randomLikesIndex = _.random(15, 200);
-  const randomCommentsIndex = _.random(0, 200);
-  const randomAvatarIndex = _.random(1, 6);
+
+const createMyFirstObject = (id) => {
+  const randomDescriptionIndex = getNumber(0, DESCRIPTIONS.length - 1);
+  const randomLikesCount = getNumber(15, 200);
+  const comments = [];
+  const randomQuantityComments = getNumber(1, 5);
+
+  for (let i = 0; i < randomQuantityComments; i++) {
+    const randomCommentsId = getNumber(0, 200);
+    const randomAvatarIndex = getNumber(1, 6);
+    const randomMessagesIndex = getNumber(0, MESSAGES.length - 1);
+    const randomNamesIndex = getNumber(0, NAMES.length - 1);
+    comments.push({
+      id: randomCommentsId,
+      avatar: 'img/avatar-' + randomAvatarIndex + '.svg',
+      message: MESSAGES[randomMessagesIndex],
+      name: NAMES[randomNamesIndex],
+    })
+  }
 
   return {
-    id: i,
-    url: 'photos/' + i + '.jpg',
-    avatar: 'img/avatar-' + i + '.svg',
+    id: id,
+    url: 'photos/' + id + '.jpg',
+    avatar: 'img/avatar-' + id + '.svg',
     description: DESCRIPTIONS[randomDescriptionIndex],
-    likes: randomLikesIndex,
-    comments: [
-      {
-        id: randomCommentsIndex,
-        avatar: 'img/avatar-' + randomAvatarIndex + '.svg',
-        message: MESSAGES[randomMessagesIndex],
-        name: NAMES[randomNamesIndex],
-      },
-    ],
+    likes: randomLikesCount,
+    comments: comments,
   };
 };
+
 const photos = [];
 for (let i = 1; i <= 25; i++) {
   const photo = createMyFirstObject(i);
   photos.push(photo);
 };
-
+console.log(photos);
 
 
