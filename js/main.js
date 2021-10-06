@@ -66,3 +66,5 @@ for (let index = 1; index <= 25; index++) {
   const photo = createMyFirstObject(index);
   photos.push(photo);
 }
+
+
