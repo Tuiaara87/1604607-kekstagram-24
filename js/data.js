@@ -55,8 +55,12 @@ const createMyFirstObject = (id) => {
   };
 };
 
-const photos = [];
-for (let index = 1; index <= 25; index++) {
-  const photo = createMyFirstObject(index);
-  photos.push(photo);
+function getPhotos() {
+  const photos = [];
+  for (let index = 1; index <= 25; index++) {
+    const photo = createMyFirstObject(index);
+    photos.push(photo);
+  }
+  return photos;
 }
+export { getPhotos };
