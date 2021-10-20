@@ -63,4 +63,16 @@ function getPhotos() {
   }
   return photos;
 }
+
+
+function getComments() {
+  const comments = [];
+  for (let index = 1; index <= 25; index++) {
+    const photo = createMyFirstObject(index);
+    comments.push(photo);
+  }
+  return comments;
+}
+
 export { getPhotos };
+export { getComments };

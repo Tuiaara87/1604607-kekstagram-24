@@ -1,4 +1,5 @@
 import { getPhotos } from './data.js';
+import { renderPopup } from './download-photo.js';
 
 const photos = getPhotos();
 
@@ -18,6 +19,10 @@ photos.forEach((photo) => {
   // a.children[0].src = photo.url;
   // a.children[1].children[0].textContent = photo.comments.length; // Записываем содержимое
   // a.children[1].children[1].textContent = photo.likes;
+  a.onclick = function (evt) {
+    evt.preventDefault;
+    renderPopup(photo);
+  };
   fragment.appendChild(a);
 });
 
