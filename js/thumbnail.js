@@ -2,13 +2,9 @@ import { getPhotos } from './data.js';
 import { renderPopup } from './download-photo.js';
 
 const photos = getPhotos();
-
 const containerPhotos = document.querySelector('.pictures');
-
 const templateWrapper = document.querySelector('#picture').content; // Находим фрагмент с содержимым темплейта
-
 const template = templateWrapper.querySelector('a'); // В фрагменте находим нужный элемент
-
 const fragment = document.createDocumentFragment();
 
 photos.forEach((photo) => {

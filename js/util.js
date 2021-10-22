@@ -2,7 +2,7 @@
 
 function getNumber(from, to) {
   const rand = from + Math.random() * (to + 1 - from);
-  return Math.ceil(rand);
+  return Math.floor(rand);
 }
 
 export { getNumber };
