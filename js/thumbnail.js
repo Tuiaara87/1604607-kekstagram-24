@@ -1,13 +1,10 @@
 import { getPhotos } from './data.js';
+import { renderPopup } from './download-photo.js';
 
 const photos = getPhotos();
-
 const containerPhotos = document.querySelector('.pictures');
-
 const templateWrapper = document.querySelector('#picture').content; // Находим фрагмент с содержимым темплейта
-
 const template = templateWrapper.querySelector('a'); // В фрагменте находим нужный элемент
-
 const fragment = document.createDocumentFragment();
 
 photos.forEach((photo) => {
@@ -18,6 +15,10 @@ photos.forEach((photo) => {
   // a.children[0].src = photo.url;
   // a.children[1].children[0].textContent = photo.comments.length; // Записываем содержимое
   // a.children[1].children[1].textContent = photo.likes;
+  a.onclick = function (evt) {
+    evt.preventDefault;
+    renderPopup(photo);
+  };
   fragment.appendChild(a);
 });
 

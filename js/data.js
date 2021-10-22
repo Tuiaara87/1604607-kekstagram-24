@@ -37,6 +37,7 @@ const createMyFirstObject = (id) => {
     const randomAvatarIndex = getNumber(1, 6);
     const randomMessagesIndex = getNumber(0, MESSAGES.length - 1);
     const randomNamesIndex = getNumber(0, NAMES.length - 1);
+
     comments.push({
       id: randomCommentsId,
       avatar: `img/avatar-${randomAvatarIndex}.svg`,
@@ -63,4 +64,16 @@ function getPhotos() {
   }
   return photos;
 }
+
+
+function getComments() {
+  const comments = [];
+  for (let index = 1; index <= 25; index++) {
+    const photo = createMyFirstObject(index);
+    comments.push(photo);
+  }
+  return comments;
+}
+
 export { getPhotos };
+export { getComments };
