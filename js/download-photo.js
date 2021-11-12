@@ -1,4 +1,4 @@
-function renderPopup(photo) {
+const renderPopup = (photo) => {
   // console.log(photo);
   const userDialog = document.querySelector('.big-picture'); // нашла элемент .big-picture
   const closeButton = userDialog.querySelector('.big-picture__cancel'); // нашла класс, который закрывает модальное окно
@@ -6,14 +6,15 @@ function renderPopup(photo) {
     userDialog.classList.add('hidden'); // добавила класс, чтобы окно закрывалось
     document.body.classList.remove('modal-open'); // удалила класс modal-open, чтобы при закрытии попап сранится могла скроллиться
   };
-  closeButton.addEventListener('click', closeWindow); // при клике closeWindow закройся
-  document.onkeyup = function (evt) {
+  closeButton.addEventListener('click', () => {
+    closeWindow();
+  }); // при клике closeWindow закройся
+  document.addEventListener('keyup', (evt) => {
     if (evt.key === 'Escape') { // при нажатии на клавишу esc окно закройся
       closeWindow();
     }
-  };
-
-  function setInfo() {
+  });
+  const setInfo = () => {
     const img = userDialog.querySelector('.big-picture__img img'); // нашла элемент .big-picture__img img
     img.src = photo.url; // подставила url
     const likes = userDialog.querySelector('.likes-count'); // нашла элемент .likes-count
@@ -22,7 +23,7 @@ function renderPopup(photo) {
     comments.textContent = photo.comments.length; // количество комментариев (длину) подставила, как текстовое содержимое элемента
     const description = userDialog.querySelector('.social__caption');
     description.textContent = photo.description; // описание фотографии вставила строкой в блок
-  }
+  };
   setInfo();
 
   userDialog.classList.remove('hidden'); // удалила класс hidden у элемента .big-picture, чтобы отобразить блок
@@ -53,6 +54,5 @@ function renderPopup(photo) {
   const socialComments = userDialog.querySelector('.social__comments');
   socialComments.innerHTML = '';
   socialComments.appendChild(fragment);
-}
+};
 export { renderPopup };
-

@@ -2,13 +2,10 @@
 const uploadFile = document.querySelector('#upload-file');
 const imgUpload = document.querySelector('.img-upload');
 const imgOverlay = imgUpload.querySelector('.img-upload__overlay');
-uploadFile.onchange = function () {
+uploadFile.addEventListener('change', () => {
   imgOverlay.classList.remove('hidden');
-
-  // 2) для body задать класс modal-open
   document.body.classList.add('modal-open');
-};
-
+});
 
 // 3) написать код для задачи:
 // - изменить масштаб фото
@@ -17,16 +14,21 @@ const scaleSmaller = imgUpload.querySelector('.scale__control--smaller');
 const scaleBigger = imgUpload.querySelector('.scale__control--bigger');
 const scaleInput = imgUpload.querySelector('.scale__control--value');
 const imgPreview = document.querySelector('.img-upload__preview');
-scaleSmaller.onclick = function () {
+scaleSmaller.addEventListener('click', () => {
   scaleInput.value -= 25;
   const scaleValue = scaleInput.value / 100;
   imgPreview.style.transform = `scale(${scaleValue})`;
-};
-scaleBigger.onclick = function () {
+});
+// scaleSmaller.onclick = function () {
+//   scaleInput.value -= 25;
+//   const scaleValue = scaleInput.value / 100;
+//   imgPreview.style.transform = `scale(${scaleValue})`;
+// };
+scaleBigger.addEventListener('click', () => {
   scaleInput.value += 25;
   const scaleValue = scaleInput.value / 100;
   imgPreview.style.transform = `scale(${scaleValue})`;
-};
+});
 
 //   - применить одно из заранее заготовленных эффектов, выбрать глубину эффекта с помощью ползунка
 
@@ -81,13 +83,13 @@ sliderElement.noUiSlider.on('update', (_, handle, unencoded) => {
   }
 });
 
-photoOriginal.onclick = function () {
+photoOriginal.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--none');
   currentFilter = 'none';
-};
+});
 
-photoChrome.onclick = function () {
+photoChrome.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--chrome');
   sliderElement.noUiSlider.updateOptions({
@@ -99,9 +101,9 @@ photoChrome.onclick = function () {
     step: 0.1,
   });
   currentFilter = 'chrome';
-};
+});
 
-photoSepia.onclick = function () {
+photoSepia.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--sepia');
   sliderElement.noUiSlider.updateOptions({
@@ -113,9 +115,9 @@ photoSepia.onclick = function () {
     step: 0.1,
   });
   currentFilter = 'sepia';
-};
+});
 
-photoMarvin.onclick = function () {
+photoMarvin.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--marvin');
   sliderElement.noUiSlider.updateOptions({
@@ -127,9 +129,9 @@ photoMarvin.onclick = function () {
     step: 1,
   });
   currentFilter = 'marvin';
-};
+});
 
-photoPhobos.onclick = function () {
+photoPhobos.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--phobos');
   sliderElement.noUiSlider.updateOptions({
@@ -141,9 +143,9 @@ photoPhobos.onclick = function () {
     step: 1,
   });
   currentFilter = 'phobos';
-};
+});
 
-photoHeat.onclick = function () {
+photoHeat.addEventListener('click', () => {
   imgPreview.className = 'img-upload__preview';
   imgPreview.classList.add('effects__preview--heat');
   sliderElement.noUiSlider.updateOptions({
@@ -155,7 +157,7 @@ photoHeat.onclick = function () {
     step: 1,
   });
   currentFilter = 'marvin';
-};
+});
 
 // 4) Закрытие формы редактирования изображения производится либо нажатием на кнопку #upload-cancel,
 // либо нажатием клавиши Esc. Элементу .img-upload__overlay возвращается класс hidden.
@@ -213,21 +215,21 @@ hashTag.addEventListener('input', () => {
   });
   hashTag.reportValidity();
 });
-hashTag.onfocus = function () {
+hashTag.addEventListener('focus', () => {
   document.removeEventListener('keyup', closeEsc);
-};
-hashTag.onblur = function () {
+});
+hashTag.addEventListener('blur', () => {
   document.addEventListener('keyup', closeEsc);
-};
+});
 
 //   6) добавить текстовой комментарий
 
-comments.onfocus = function () {
+comments.addEventListener('click', () => {
   document.removeEventListener('keyup', closeEsc);
-};
-comments.onblur = function () {
+});
+comments.addEventListener('blur', () => {
   document.addEventListener('keyup', closeEsc);
-};
+});
 
 // 7) Реализуйте логику проверки так, чтобы, как минимум, она срабатывала при попытке отправить форму и не давала этого сделать,
 //  если форма заполнена не по правилам.
