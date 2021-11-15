@@ -19,13 +19,9 @@ scaleSmaller.addEventListener('click', () => {
   const scaleValue = scaleInput.value / 100;
   imgPreview.style.transform = `scale(${scaleValue})`;
 });
-// scaleSmaller.onclick = function () {
-//   scaleInput.value -= 25;
-//   const scaleValue = scaleInput.value / 100;
-//   imgPreview.style.transform = `scale(${scaleValue})`;
-// };
+
 scaleBigger.addEventListener('click', () => {
-  scaleInput.value += 25;
+  scaleInput.value = +scaleInput.value + 25;
   const scaleValue = scaleInput.value / 100;
   imgPreview.style.transform = `scale(${scaleValue})`;
 });
@@ -183,6 +179,7 @@ document.addEventListener('keyup', closeEsc);
 
 hashTag.addEventListener('input', () => {
   let arrayHashTag = hashTag.value.split(' ');
+  hashTag.setCustomValidity('');
 
   arrayHashTag.forEach((hash, index) => {
     if (hash[0] !== '#') {
@@ -192,6 +189,7 @@ hashTag.addEventListener('input', () => {
       hashTag.setCustomValidity('строка после решётки должна состоять из букв и чисел и не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.;');
     }
     if (hash === '#') {
+      console.log(hash);
       hashTag.setCustomValidity('хеш-тег не может состоять только из одной решётки;');
     }
     if (hash.length > 20) {
