@@ -28,31 +28,51 @@ const renderPopup = (photo) => {
 
   userDialog.classList.remove('hidden'); // удалила класс hidden у элемента .big-picture, чтобы отобразить блок
   const socialCommentCount = userDialog.querySelector('.social__comment-count'); // нашла элемент .social__comment-count
-  socialCommentCount.classList.add('hidden'); // добавила элементу класс hidden, спрятать блоки счётчика комментариев
+  socialCommentCount.classList.remove('hidden'); // удалила класс hidden, спрятать блоки счётчика комментариев
   const commentsLoader = userDialog.querySelector('.comments-loader'); // нашла элемент .comments-loader
-  commentsLoader.classList.add('hidden'); // добавила элементу класс hidden, спрятать блоки счётчика комментариев
+  commentsLoader.classList.remove('hidden'); // удалила класс hidden, спрятать блоки счётчика комментариев
   document.body.classList.add('modal-open'); // добавила кдасс modal-open чтобы контейнер с фотографиями позади не прокручивался при скролле.
   const fragment = document.createDocumentFragment(); //создала коробочку, куда потом все сложу
 
-  photo.comments.forEach((comment) => {
-    const commentsListItem = document.createElement('li'); // создала эдемент
-    commentsListItem.classList.add('social__comment'); // добавила класс элементу
-    const img = document.createElement('img');
-    img.classList.add('social__picture');
-    img.src = comment.avatar;
-    img.alt = comment.name;
-    img.width = 35;
-    img.height = 35;
-    const p = document.createElement('p');
-    p.classList.add('social__text');
-    p.textContent = comment.message;
-    commentsListItem.appendChild(img);
-    commentsListItem.appendChild(p);
-    fragment.appendChild(commentsListItem);
-  });
-
   const socialComments = userDialog.querySelector('.social__comments');
+
+  let lastComment = 0;
+  const offset = (start) => {
+    lastComment += 5;
+    for (let i = start; i < lastComment; i++) {
+      if (i < photo.comments.length) {
+        const commentsListItem = document.createElement('li'); // создала эдемент
+        commentsListItem.classList.add('social__comment'); // добавила класс элементу
+        const img = document.createElement('img');
+        img.classList.add('social__picture');
+        img.src = photo.comments[i].avatar;
+        img.alt = photo.comments[i].name;
+        img.width = 35;
+        img.height = 35;
+        const p = document.createElement('p');
+        p.classList.add('social__text');
+        p.textContent = photo.comments[i].message;
+        commentsListItem.appendChild(img);
+        commentsListItem.appendChild(p);
+        fragment.appendChild(commentsListItem);
+      } else {
+        commentsLoader.style.display = 'none';
+      }
+    }
+    socialComments.appendChild(fragment);
+  };
+
   socialComments.innerHTML = '';
-  socialComments.appendChild(fragment);
+  offset(0);
+  if (photo.comments.length > 5) {
+    commentsLoader.style.display = 'block';
+    commentsLoader.addEventListener('click', () => {
+      offset(lastComment);
+    });
+  }
+
 };
+
 export { renderPopup };
+
+

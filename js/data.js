@@ -30,7 +30,7 @@ const createMyFirstObject = (id) => {
   const randomDescriptionIndex = getNumber(0, DESCRIPTIONS.length - 1);
   const randomLikesCount = getNumber(15, 200);
   const comments = [];
-  const randomQuantityComments = getNumber(1, 5);
+  const randomQuantityComments = getNumber(1, 20);
 
   for (let index = 0; index < randomQuantityComments; index++) {
     const randomCommentsId = getNumber(0, 200);
